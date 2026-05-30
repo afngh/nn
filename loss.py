@@ -1,0 +1,11 @@
+#returns loss
+def mse(y_pred,y_true):
+    return ((y_pred-y_true) ** 2)
+
+#returns gradient
+def mse_derivative(input,y_pred,y_true):
+    return [(y_pred - y_true) * x for x in input]
+
+#updates weights for learning
+def gradient_descent(weight,gradient,learning_rate=0.01):
+    return [w - learning_rate * g for w,g in zip(weight,gradient)]
