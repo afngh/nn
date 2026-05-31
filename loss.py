@@ -3,7 +3,7 @@ def mse(y_pred,y_true):
     return ((y_pred-y_true) ** 2)
 
 #returns gradient
-def mse_derivative(input,y_pred,y_true):
+def compute_gradients(input,y_pred,y_true,z):
     return [(y_pred - y_true) * x for x in input]
 
 #updates weights for learning
