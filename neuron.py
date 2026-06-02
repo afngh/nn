@@ -5,6 +5,7 @@ from loss import compute_gradients
 from vectors import *
 from activation import *
 from loss import *
+import matplotlib.pyplot as plt
 
 class Neuron():
     def __init__(self,weights,bias,a_type=sigmoid,a_deriv=None):
@@ -53,6 +54,7 @@ class NeuralLayer():
 class NeuralNetwork():
     def __init__(self):
         self.layers = []
+        self.pred_history = []
 
     def add(self, layer):
         self.layers.append(layer)
@@ -82,3 +84,44 @@ class NeuralNetwork():
         for layer in self.layers:
             for neuron in layer.neurons:
                 neuron.update_parameters(learning_rate)
+
+    def data_graph(self, pred, target):
+        self.pred_history.append(pred)
+        epoch = len(self.pred_history)
+        
+        # Throttle updates to maintain high training speed (update every 25 epochs)
+        if epoch % 25 != 0 and epoch != 1 and epoch != 5000:
+            return
+            
+        if epoch == 1:
+            plt.ion()
+            plt.figure("XOR Prediction Live Convergence", figsize=(10, 6))
+            
+        plt.clf()
+        
+        epochs_range = list(range(1, epoch + 1))
+        p00 = [p[0] for p in self.pred_history]
+        p01 = [p[1] for p in self.pred_history]
+        p10 = [p[2] for p in self.pred_history]
+        p11 = [p[3] for p in self.pred_history]
+        
+        # Vibrant modern styling
+        plt.plot(epochs_range, p00, label="Pred (0,0) -> 0", color="#e74c3c", linewidth=2.5)
+        plt.plot(epochs_range, p01, label="Pred (0,1) -> 1", color="#2ecc71", linewidth=2.5)
+        plt.plot(epochs_range, p10, label="Pred (1,0) -> 1", color="#3498db", linewidth=2.5)
+        plt.plot(epochs_range, p11, label="Pred (1,1) -> 0", color="#f1c40f", linewidth=2.5)
+        
+        # Helper target markers
+        plt.axhline(y=0, color="#95a5a6", linestyle="--", alpha=0.7, label="Target 0")
+        plt.axhline(y=1, color="#2c3e50", linestyle="--", alpha=0.7, label="Target 1")
+        
+        plt.title(f"XOR Prediction Convergence (Epoch {epoch})", fontsize=14, fontweight="bold", pad=15)
+        plt.xlabel("Epoch", fontsize=12)
+        plt.ylabel("Prediction Value", fontsize=12)
+        plt.ylim(-0.1, 1.1)
+        plt.grid(True, linestyle=":", alpha=0.6)
+        plt.legend(loc="lower left", frameon=True, facecolor="white", framealpha=0.9)
+        
+        plt.draw()
+        plt.pause(0.001)
+            
