@@ -14,11 +14,19 @@ A lightweight, dependency-free (except for optional visualization) neural networ
 
 ---
 
-## 📈 Live XOR Convergence Visualization
+## 📈 Live Gate Training Convergence
 
-Solving the XOR logic gate requires non-linear decision boundaries. The live training visualization demonstrates all four XOR coordinates (`[0,0]`, `[0,1]`, `[1,0]`, and `[1,1]`) converging gracefully and completely to their binary targets (`0` and `1`) over 5000 training epochs:
+The live training visualizer demonstrates coordinates converging gracefully and completely to their binary targets over the epochs.
 
+### XOR Gate Convergence (5000 Epochs, lr=0.5)
+Solving the non-linear XOR logic gate requires multi-layer decision boundaries:
 ![XOR Epoch Convergence](./sample/XOR_Prediction_Live_Convergence.png)
+
+### AND Gate Convergence (1000 Epochs, lr=1.0)
+![AND Gate Convergence](./sample/AND_gate_training.png)
+
+### OR Gate Convergence (1000 Epochs, lr=1.0)
+![OR Gate Convergence](./sample/OR_gate_training.png)
 
 ---
 
