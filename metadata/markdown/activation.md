@@ -5,6 +5,7 @@ A lightweight Python module containing implementations of common activation func
 ---
 
 ## Table of Contents
+
 - [Sigmoid Function](#sigmoid-function)
   - [sigmoid](#sigmoid)
   - [sigmoid_derivative](#sigmoid_derivative)
@@ -20,23 +21,27 @@ A lightweight Python module containing implementations of common activation func
 The Sigmoid function maps any real-valued number into a range between 0 and 1. It is commonly used as an activation function in binary classification models.
 
 ### `sigmoid`
+
 Computes the standard logistic sigmoid activation.
 $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
 
 ```python
 def sigmoid(x: float) -> float
 ```
+
 - **Parameters:**
   - `x`: Input scalar value.
 - **Returns:** A float value in the range $(0, 1)$.
 
 ### `sigmoid_derivative`
+
 Computes the derivative of the sigmoid function with respect to its input.
 $$\sigma'(x) = \sigma(x) \cdot (1 - \sigma(x))$$
 
 ```python
 def sigmoid_derivative(x: float) -> float
 ```
+
 - **Parameters:**
   - `x`: Input scalar value.
 - **Returns:** The derivative value, which has a maximum value of $0.25$ at $x = 0$.
@@ -48,21 +53,24 @@ def sigmoid_derivative(x: float) -> float
 The Rectified Linear Unit (ReLU) is one of the most widely used activation functions in deep learning. It outputs the input directly if it is positive, and zero otherwise.
 
 ### `relu`
+
 Computes the rectified linear unit activation.
 $$f(x) = \max(0, x)$$
 
 ```python
 def relu(x: float) -> float
 ```
+
 - **Parameters:**
   - `x`: Input scalar value.
 - **Returns:** $x$ if $x > 0$, otherwise $0$.
 
 ### `relu_derivative`
+
 Computes the derivative of the ReLU function.
-$$f'(x) = \begin{cases} 
+$$f'(x) = \begin{cases}
 1 & \text{if } x > 0 \\
-0 & \text{if } x \le 0 
+0 & \text{if } x \le 0
 \end{cases}$$
 
 ```python
