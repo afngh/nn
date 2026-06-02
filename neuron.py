@@ -87,7 +87,7 @@ class NeuralNetwork():
             for neuron in layer.neurons:
                 neuron.update_parameters(learning_rate)
 
-    def data_graph(self, pred, target):
+    def data_graph(self, pred, target,title="Data Visualization"):
         self.pred_history.append(pred)
         epoch = len(self.pred_history)
         
@@ -97,7 +97,7 @@ class NeuralNetwork():
             
         if epoch == 1:
             plt.ion()
-            plt.figure("XOR Prediction Live Convergence", figsize=(10, 6))
+            plt.figure(title, figsize=(10, 6))
             
         plt.clf()
         
@@ -108,16 +108,16 @@ class NeuralNetwork():
         p11 = [p[3] for p in self.pred_history]
         
         # Vibrant modern styling
-        plt.plot(epochs_range, p00, label="Pred (0,0) -> 0", color="#e74c3c", linewidth=2.5)
-        plt.plot(epochs_range, p01, label="Pred (0,1) -> 1", color="#2ecc71", linewidth=2.5)
-        plt.plot(epochs_range, p10, label="Pred (1,0) -> 1", color="#3498db", linewidth=2.5)
-        plt.plot(epochs_range, p11, label="Pred (1,1) -> 0", color="#f1c40f", linewidth=2.5)
+        plt.plot(epochs_range, p00, label="[0,0] => 0", color="#e74c3c", linewidth=2.5)
+        plt.plot(epochs_range, p01, label="[0,1] => 1", color="#2ecc71", linewidth=2.5)
+        plt.plot(epochs_range, p10, label="[1,0] => 1", color="#3498db", linewidth=2.5)
+        plt.plot(epochs_range, p11, label="[1,1] => 1", color="#f1c40f", linewidth=2.5)
         
         # Helper target markers
         plt.axhline(y=0, color="#95a5a6", linestyle="--", alpha=0.7, label="Target 0")
         plt.axhline(y=1, color="#2c3e50", linestyle="--", alpha=0.7, label="Target 1")
         
-        plt.title(f"XOR Prediction Convergence (Epoch {epoch})", fontsize=14, fontweight="bold", pad=15)
+        plt.title(f"{title} (Epoch {epoch})", fontsize=14, fontweight="bold", pad=15)
         plt.xlabel("Epoch", fontsize=12)
         plt.ylabel("Prediction Value", fontsize=12)
         plt.ylim(-0.1, 1.1)
