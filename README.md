@@ -9,7 +9,7 @@ A lightweight, dependency-free (except for optional visualization) neural networ
 * **Custom Autograd-like Backpropagation**: Mathematically correct, layer-by-layer backpropagation (`backward`) and parameter update (`update`) routines for weights and biases.
 * **Modular OOP Design**: Highly clean `Neuron`, `NeuralLayer`, and `NeuralNetwork` classes that permit arbitrary layers, node sizes, and activations.
 * **Vector Math Library (`vectors.py`)**: A completely custom, zero-dependency linear algebra module handling dot products, scalar multiplication, and matrix multiplication.
-* **Multiple Activations**: Sigmoid and ReLU functions, coupled with their respective dynamic analytical derivatives.
+* **Multiple Activations**: Sigmoid, ReLU, and Tanh functions, coupled with their respective dynamic analytical derivatives.
 * **Live Training Visualizer**: Real-time rendering of predictions converging to target outputs over training epochs using `matplotlib`.
 
 ---
@@ -49,6 +49,7 @@ Encapsulates activation functions and their derivatives, critical for scaling gr
 
 * **Sigmoid**: $f(x) = \frac{1}{1 + e^{-x}}$ with derivative $f'(x) = f(x)(1 - f(x))$.
 * **ReLU**: $f(x) = \max(0, x)$ with derivative $f'(x) = 1 \text{ if } x > 0 \text{ else } 0$.
+* **Tanh**: $f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$ with derivative $f'(x) = 1 - \tanh^2(x)$.
 
 ### 3. Core Framework (`neuron.py`)
 

@@ -17,6 +17,8 @@ class Neuron():
                 self.a_deriv = sigmoid_derivative
             elif a_type == relu:
                 self.a_deriv = relu_derivative
+            elif a_type == tanh:
+                self.a_deriv = tanh_derivative
             else:
                 self.a_deriv = lambda x: 1.0
         else:
