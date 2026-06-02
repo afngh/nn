@@ -1,7 +1,9 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import matplotlib.pyplot as plt
-from neuron import NeuralNetwork, NeuralLayer
-from loss import mse
-from activation import sigmoid
+from lib import NeuralNetwork, NeuralLayer, mse, sigmoid
 
 data = [
     ([0, 0], 0),

@@ -1,5 +1,5 @@
-from activation import sigmoid_derivative
-from activation import relu_derivative
+from .activation import sigmoid_derivative
+from .activation import relu_derivative
     
 
 #returns loss

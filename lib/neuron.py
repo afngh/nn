@@ -1,10 +1,10 @@
 from time import sleep
 import random
-from loss import mse
-from loss import compute_gradients
-from vectors import *
-from activation import *
-from loss import *
+from .loss import mse
+from .loss import compute_gradients
+from .vectors import *
+from .activation import *
+from .loss import *
 import matplotlib.pyplot as plt
 
 class Neuron():

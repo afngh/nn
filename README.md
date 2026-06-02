@@ -8,7 +8,7 @@ A lightweight, dependency-free (except for optional visualization) neural networ
 
 * **Custom Autograd-like Backpropagation**: Mathematically correct, layer-by-layer backpropagation (`backward`) and parameter update (`update`) routines for weights and biases.
 * **Modular OOP Design**: Highly clean `Neuron`, `NeuralLayer`, and `NeuralNetwork` classes that permit arbitrary layers, node sizes, and activations.
-* **Vector Math Library (`vectors.py`)**: A completely custom, zero-dependency linear algebra module handling dot products, scalar multiplication, and matrix multiplication.
+* **Vector Math Library (`lib/vectors.py`)**: A completely custom, zero-dependency linear algebra module handling dot products, scalar multiplication, and matrix multiplication.
 * **Multiple Activations**: Sigmoid, ReLU, and Tanh functions, coupled with their respective dynamic analytical derivatives.
 * **Live Training Visualizer**: Real-time rendering of predictions converging to target outputs over training epochs using `matplotlib`.
 
@@ -18,24 +18,32 @@ A lightweight, dependency-free (except for optional visualization) neural networ
 
 Solving the XOR logic gate requires non-linear decision boundaries. The live training visualization demonstrates all four XOR coordinates (`[0,0]`, `[0,1]`, `[1,0]`, and `[1,1]`) converging gracefully and completely to their binary targets (`0` and `1`) over 5000 training epochs:
 
-![XOR Epoch Convergence](./XOR_Prediction_Live_Convergence.png)
+![XOR Epoch Convergence](./sample/XOR_Prediction_Live_Convergence.png)
 
 ---
 
 ## 🛠️ Repository Architecture
 
-The codebase is organized into highly focused modules:
+The codebase is organized into highly focused folders:
 
 ```text
-├── activation.py   # Sigmoid & ReLU activations + analytical derivatives
-├── loss.py         # Mean Squared Error (MSE) loss and updates
-├── vectors.py      # Zero-dependency Vector & Matrix Math engine
-├── neuron.py       # Core classes: Neuron, NeuralLayer, and NeuralNetwork
-├── xor.py          # XOR solver with live matplotlib visualization
-└── test.py         # Hyperparameter and sequential chain testing script
+├── lib/
+│   ├── __init__.py    # Exposes core API classes/functions
+│   ├── activation.py  # Sigmoid, ReLU & Tanh activations + derivatives
+│   ├── loss.py        # Mean Squared Error (MSE) loss and gradients
+│   ├── vectors.py     # Zero-dependency Vector & Matrix Math engine
+│   └── neuron.py      # Core classes: Neuron, NeuralLayer, and NeuralNetwork
+├── main/
+│   ├── and.py         # AND gate solver with live matplotlib visualization
+│   ├── or.py          # OR gate solver with live matplotlib visualization
+│   └── xor.py         # XOR gate solver with live matplotlib visualization
+├── test/
+│   └── test.py        # Verification and unit testing script
+├── sample/            # Output training visualization PNG plots
+└── metadata/          # Mathematical details and documentation files
 ```
 
-### 1. Vector Math (`vectors.py`)
+### 1. Vector Math (`lib/vectors.py`)
 
 Provides custom mathematical operations on Python lists, bypassing standard external libraries like NumPy:
 
@@ -43,7 +51,7 @@ Provides custom mathematical operations on Python lists, bypassing standard exte
 * `mat_mul(m1, m2)`: Computes matrix-matrix products.
 * `add(v1, v2)` / `sub(v1, v2)`: Element-wise list addition and subtraction.
 
-### 2. Activations (`activation.py`)
+### 2. Activations (`lib/activation.py`)
 
 Encapsulates activation functions and their derivatives, critical for scaling gradients backward:
 
@@ -51,7 +59,7 @@ Encapsulates activation functions and their derivatives, critical for scaling gr
 * **ReLU**: $f(x) = \max(0, x)$ with derivative $f'(x) = 1 \text{ if } x > 0 \text{ else } 0$.
 * **Tanh**: $f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$ with derivative $f'(x) = 1 - \tanh^2(x)$.
 
-### 3. Core Framework (`neuron.py`)
+### 3. Core Framework (`lib/neuron.py`)
 
 * **`Neuron`**: Manages weights, bias, activation type, stored inputs, pre-activations ($z$), outputs, and errors. Dynamically updates itself using standard gradient descent:
     $$w_i \leftarrow w_i - \eta \cdot \delta \cdot x_i$$
@@ -68,7 +76,7 @@ Encapsulates activation functions and their derivatives, critical for scaling gr
 To run the XOR dataset solver and view the live convergence animation, execute:
 
 ```bash
-python xor.py
+python main/xor.py
 ```
 
 ### Building Your Own Network
@@ -76,9 +84,7 @@ python xor.py
 You can assemble and train your own sequential network in just a few lines of code:
 
 ```python
-from neuron import NeuralNetwork, NeuralLayer
-from activation import sigmoid
-from loss import mse
+from lib import NeuralNetwork, NeuralLayer, sigmoid
 
 # 1. Instantiate network
 nn = NeuralNetwork()
