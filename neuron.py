@@ -41,12 +41,12 @@ class NeuralLayer():
             if weights is not None:
                 w = list(weights)
             else:
-                w = [random.uniform(0.5, 1.0) for _ in range(layer_size)]
-            bias = random.uniform(0, 0.5)
+                w = [random.uniform(-1.0, 1.0) for _ in range(layer_size)]
+            bias = random.uniform(-0.5, 0.5)
             self.neurons.append(Neuron(weights=w, bias=bias, a_type=a_type))
 
     def forward(self,input):
-        print(f"length of nl: {self.neurons}")
+        # print(f"length of nl: {self.neurons}")
         self.output = [neuron.forward(input) for neuron in self.neurons]
         return self.output
 
@@ -60,10 +60,10 @@ class NeuralNetwork():
 
     def forward(self, inputs):
         output = inputs
-        print("Init NN")
+        # print("Init NN")
         for layer in self.layers:
             output = layer.forward(output)
-            print(f"Output of NN Layer: {output}")
+            # print(f"Output of NN Layer: {output}")
 
         return output
 
